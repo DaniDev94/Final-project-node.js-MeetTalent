@@ -20,10 +20,7 @@ const test = [
 
 
 
-
-
-
-
+app.use('/users', UserRoutes);
 
 
 

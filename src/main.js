@@ -5,7 +5,7 @@ const { connectWithDb } = require('./utils/db/db')
 const PORT = 3000;
 const app = express();
 
-connectWithDb();
+connectWithDb()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

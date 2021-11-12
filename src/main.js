@@ -1,5 +1,6 @@
-const express = require('express')
-const { connectWithDb } = require('./utils/db/db')
+const express = require('express');
+const EnterpriseRoutes = require('./routes/enterprise.routes');
+const { connectWithDb } = require('./utils/db/db');
 
 
 const PORT = 3000;
@@ -11,13 +12,21 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use('*', (req, res) => {
-    return res.status(404).send('Route not found')
-})
+    return res.status(404).send('Route not found');
+});
+
+app.use((req, res, next) =>{
+    let err = new Error();
+    err.status = 404;
+    err.message = 'Unexpected error';
+    next(err);
+}
+);
+
 
 app.listen(PORT, () => {
-    console.log('Server is running in http://localhost:'+PORT)
-})
-
+    console.log('Server is running in http://localhost:'+PORT);
+});
 
 
 

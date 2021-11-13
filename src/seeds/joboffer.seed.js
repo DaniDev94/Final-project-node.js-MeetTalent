@@ -2,6 +2,15 @@ const mongoose = require('mongoose');
 const JobOffer = require('../models/joboffer.models');
 require('dotenv').config();
 
+// const jobOffer = [
+//     {
+//     field1: {
+//         offerTitle:
+//     }
+//     }
+// ]
+
+
 const jobOffer = [
     {
         city: 'Madrid',

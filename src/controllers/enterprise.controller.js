@@ -66,7 +66,7 @@ const getEnterpriseById = (req, res) => {
     if (findEnterprise >= 0) {
         return res.status(200).json(Enterprise[findEnterprise])
     } 
-        return res.status(404).json('No existe videojuego con esa id')
+        return res.status(404).json('Enterprise by id not found')
     
 }
 

@@ -18,7 +18,7 @@ app.use('/enterprise', EnterpriseRoutes);
 app.use('/candidates', CandidateRoutes);
 
 
-app.use('/users', usersRoutes)
+app.use('/users', userRoutes)
 app.use('*', (req, res) => {
     return res.status(404).send('Route not found');
 });

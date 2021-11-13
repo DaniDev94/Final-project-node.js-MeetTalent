@@ -13,7 +13,7 @@ const getJobOffer = async(req, res, next) => {
 };
 const postNewJobOffer = async(req, res, next) => {
     try{
-        const newEnterprise = new JobOffer(req.body);
+        const newJoboffer = new JobOffer(req.body);
         const JobOffersave = await newJoboffer.save()
         return res.status(200).json(JobOffersave)
     }catch(err){
@@ -66,7 +66,7 @@ const getJobOfferById = (req, res) => {
     if (findJobOffer >= 0) {
         return res.status(200).json(JobOffer[findJobOffer])
     } 
-        return res.status(404).json('No existe videojuego con esa id')
+        return res.status(404).json('No existe oferta con esa id')
     
 }
 

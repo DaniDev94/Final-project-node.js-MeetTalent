@@ -4,11 +4,17 @@ const CandidateRoutes = require('./routes/candidate.routes');
 
 const { connectWithDb } = require('./utils/db/db');
 
-
+const cloudinary = require('cloudinary').v2;
+require("dotenv").config();
 const PORT = 3000;
 const app = express();
-
 connectWithDb()
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+})
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

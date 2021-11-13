@@ -22,8 +22,20 @@ const getCandidateById = async (req, res, next) => {
     }
 }
 
+const postNewCandidate = async (req, res, next) => {
+    try {
+        const newCandidate = new Candidate(req.body);
+        const candidateSave = await newCandidate.save();
+        return res.status(200).json(candidateSave);
+    } catch (err) {
+        err.message = 'The new candidate cannot be created, it may already exist';
+        return next(`Error: ${err}.`);
+    }
+}
+
 
 module.exports = {
     getAllCandidates,
-    getCandidateById
+    getCandidateById,
+    postNewCandidate
 }

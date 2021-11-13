@@ -33,9 +33,23 @@ const postNewCandidate = async (req, res, next) => {
     }
 }
 
+const putCandidateUpdate = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const varyCandidate = new Candidate(req.body);
+        varyCandidate._id = id;
+        const updateCandidate = await Candidate.findByIdAndUpdate(id, varyCandidate);
+        return res.status(200).json(updateCandidate);
+    } catch (err) {
+        err.message = 'Candidate not found, cannot be updated';
+        return next(`Error: ${err}.`);
+    }
+}
+
 
 module.exports = {
     getAllCandidates,
     getCandidateById,
-    postNewCandidate
+    postNewCandidate,
+    putCandidateUpdate
 }

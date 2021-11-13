@@ -36,7 +36,7 @@ const cadidateSchema = new mongoose.Schema({
             min: 18
         },
         address: {
-            city: {
+            community: {
                 type: String,
                 required: true,
                 trim: true

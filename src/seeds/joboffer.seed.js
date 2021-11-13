@@ -108,7 +108,7 @@ mongoose
     })
     .catch((err) => console.log(`Error deleting data: ${err}`))
     .then(async () => {
-        await JobOffer.insertMany(JobOffer);
+        await JobOffer.insertMany(jobOffer);
     })
     .catch((err) => console.log(`Error creating data: ${err}`))
     .finally(() => mongoose.disconnect());

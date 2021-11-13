@@ -1,12 +1,12 @@
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
-const { CloudStorage } = require('multer-storage-cloudinary');
-require("dotenv").config();
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-const storage = new CloudStorage({
+
+const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: process.env.NODE_ENV
+        folder: "Meettalent"
     }
 })
 

@@ -1,5 +1,7 @@
 const express = require('express');
 const EnterpriseRoutes = require('./routes/enterprise.routes');
+const CandidateRoutes = require('./routes/candidate.routes');
+
 const { connectWithDb } = require('./utils/db/db');
 
 
@@ -11,6 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/enterprise', EnterpriseRoutes);
+app.use('/candidates', CandidateRoutes);
 
 
 app.use('*', (req, res) => {

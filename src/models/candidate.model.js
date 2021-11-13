@@ -2,15 +2,9 @@ const mongoose = require('mongoose');
 
 const cadidateSchema = new mongoose.Schema({
     image: {
-        name: {
-            type: String,
-            trim: true,
-        },
-        url: {
-            type: String,
-            unique: true,
-            trim: true
-        }
+        type: String,
+        unique: true,
+        trim: true
     },
     name: {
         first: {

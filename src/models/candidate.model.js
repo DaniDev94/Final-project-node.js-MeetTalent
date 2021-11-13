@@ -56,29 +56,29 @@ const cadidateSchema = new mongoose.Schema({
             type: Number,
             required: true,
             unique: true,
+        }
+    },
+    keywords: {
+        type: [String],
+        trim: true,
+    },
+    training: {
+        type: {
+            type: String,
+            required: true,
+            trim: true
         },
-        keywords: {
-            type: [String],
-            trim: true,
+        name: {
+            type: String,
+            required: true,
+            trim: true
         },
-        training: {
-            type: {
-                type: String,
-                required:true,
-                trim: true
-            },
-            name: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            center: {
-                type: String,
-                trim: true
-            }
+        center: {
+            type: String,
+            trim: true
         }
     }
-},{timestamps:true});
+}, { timestamps: true });
 
 
 const Candidate = mongoose.model('candidates', cadidateSchema);

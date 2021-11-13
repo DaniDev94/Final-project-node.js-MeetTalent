@@ -2,6 +2,8 @@ const express = require('express');
 const EnterpriseRoutes = require('./routes/enterprise.routes');
 const CandidateRoutes = require('./routes/candidate.routes');
 
+const userRoutes = require('./routes/user.routes')
+
 const { connectWithDb } = require('./utils/db/db');
 
 
@@ -16,6 +18,7 @@ app.use('/enterprise', EnterpriseRoutes);
 app.use('/candidates', CandidateRoutes);
 
 
+app.use('/users', usersRoutes)
 app.use('*', (req, res) => {
     return res.status(404).send('Route not found');
 });

@@ -76,5 +76,5 @@ module.exports = {
     putJobOffer,
     pachJobOffer,
     deleteJobOffer,
-    getJobOffer
+    getJobOfferById
 };

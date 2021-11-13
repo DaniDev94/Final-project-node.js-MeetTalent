@@ -47,7 +47,7 @@ const cadidateSchema = new mongoose.Schema({
                 trim: true
             },
             pc: {
-                type: String,
+                type: Number,
                 required: true,
                 trim: true
             }

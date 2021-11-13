@@ -25,7 +25,6 @@ const cadidateSchema = new mongoose.Schema({
     },
     networks: {
         type: [String],
-        unique: true,
         trim: true
     },
     information: {

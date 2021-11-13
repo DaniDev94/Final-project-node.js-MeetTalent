@@ -46,10 +46,22 @@ const putCandidateUpdate = async (req, res, next) => {
     }
 }
 
+const deleteCandidate = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const deleteCandidate = await Candidate.findByIdAndDelete(id);
+        return res.status(200).json(deleteCandidate);
+    } catch (err) {
+        err.message = 'Candidate not found, could not be removed';
+        return next(`Error: ${err}.`);
+    }
+}
+
 
 module.exports = {
     getAllCandidates,
     getCandidateById,
     postNewCandidate,
-    putCandidateUpdate
+    putCandidateUpdate,
+    deleteCandidate
 }

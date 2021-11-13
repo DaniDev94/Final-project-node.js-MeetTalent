@@ -101,14 +101,14 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(async () => {
-        const allJobOffer = await Candidate.find();
+        const allJobOffer = await JobOffer.find();
         if (allJobOffer.length) {
             await JobOffer.collection.drop();
         }
     })
     .catch((err) => console.log(`Error deleting data: ${err}`))
     .then(async () => {
-        await Candidate.insertMany(JobOffer);
+        await JobOffer.insertMany(JobOffer);
     })
     .catch((err) => console.log(`Error creating data: ${err}`))
     .finally(() => mongoose.disconnect());

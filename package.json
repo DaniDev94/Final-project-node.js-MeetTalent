@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/main.js",
-    "dev": "nodemon src/main.js"
+    "dev": "nodemon src/main.js",
+    "debug": "node src/main.js"
   },
   "author": "Isabel Morato, Aitor Olivar y Daniel López",
   "license": "ISC",

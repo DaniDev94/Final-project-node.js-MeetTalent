@@ -1,15 +1,24 @@
 const express = require('express');
+const { connectWithDb } = require('./utils/db/db');
 const EnterpriseRoutes = require('./routes/enterprise.routes');
 const CandidateRoutes = require('./routes/candidate.routes');
 const JobOfferRoutes = require('./routes/joboffer.routes');
+const cloudinary = require('cloudinary').v2;
+require("dotenv").config();
 
-const { connectWithDb } = require('./utils/db/db');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+})
 
 
 const PORT = 3000;
 const app = express();
-
 connectWithDb()
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -30,9 +39,10 @@ app.use((req, res, next) =>{
 }
 );
 
+app.disable("x-powered-by");
 
 app.listen(PORT, () => {
-    console.log('Server is running in http://localhost:'+PORT);
+    console.log(`Server is running in http://localhost:${PORT}`);
 });
 
 

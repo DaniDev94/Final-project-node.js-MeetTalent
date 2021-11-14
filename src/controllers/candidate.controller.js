@@ -1,6 +1,7 @@
 const Candidate = require('../models/candidate.model');
 
 
+
 const getAllCandidates = async (req, res, next) => {
     try {
         const allCandidates = await Candidate.find();
@@ -25,6 +26,7 @@ const getCandidateById = async (req, res, next) => {
 const postNewCandidate = async (req, res, next) => {
     try {
         const newCandidate = new Candidate(req.body);
+        if(req.file.path) newCandidate.image = req.file.path;
         const candidateSave = await newCandidate.save();
         return res.status(200).json(candidateSave);
     } catch (err) {

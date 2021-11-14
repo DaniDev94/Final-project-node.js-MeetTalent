@@ -26,7 +26,8 @@ const getCandidateById = async (req, res, next) => {
 const postNewCandidate = async (req, res, next) => {
     try {
         const newCandidate = new Candidate(req.body);
-        if(req.file.path) newCandidate.image = req.file.path;
+        const candidatePicture = req.file ? req.file.path : req.body.image;
+        newCandidate.image = candidatePicture
         const candidateSave = await newCandidate.save();
         return res.status(200).json(candidateSave);
     } catch (err) {

@@ -2,25 +2,29 @@ const mongoose = require('mongoose');
 
 const jobofferSchema = new mongoose.Schema(
     {
-
-        city: {
-            type: String,
-            required: true,
-            trim: true
+        field1: {
+            offerTitle: {
+                type: String,
+                required: true,
+                trim: true
+            },
+            city: {
+                type: String,
+                required: true,
+                trim: true
+            },
+            country: {
+                type: String,
+                required: true,
+                trim: true
+            },
         },
-        country: {
-            type: String,
-            required: true,
-            trim: true
-        },
-        availability: {
-            type: String,
-            trim: true
-        },
 
-        //condiciones
-
-        terms: {
+        field2: {
+            availability: {
+                type: String,
+                trim: true
+            },
             salary: {
                 type: Number,
                 required: true,
@@ -36,60 +40,20 @@ const jobofferSchema = new mongoose.Schema(
                 required: true,
                 trim: true
             },
-            
-            //descripción de la oferta
-
-            offerDescription: {
-                descriptionOfRequirements: {
-                    type: String,
-                    required: true,
-                    trim: true
-                },
-                internalEncodings: {
-                    type: String,
-                    required: true,
-                    trim: true
-                }
+            vacancies: {
+                type: Number,
+                required: true,
+                trim: true
             },
+            language: {
+                type: String,
+                required: true,
+                trim: true
+            },
+        }
+    }, { timestamps: true });
 
-            //confirmación
-            confirmation: {
-                offerTitle: {
-                    type: String,
-                    required: true,
-                    trim: true
-                },
-                vacancies: {
-                    type: Number,
-                    required: true,
-                    trim: true
-                },
-                language: {
-                    type: String,
-                    required: true,
-                    trim: true
-                },
-                sector: {
-                    type: String,
-                    required: true,
-                    trim: true
-                },
-                training: {
-                    type: String,
-                    required: true,
-                    trim: true
-                },
-                offerDescriptionEnterprise: {
-                    type: String,
-                    required: true,
-                    trim: true
-                }
-            }
-        },
 
-    },
-
-)
 
 
 const JobOffer = mongoose.model('jobOffer', jobofferSchema);

@@ -4,95 +4,54 @@ require('dotenv').config();
 
 const jobOffer = [
     {
-        city: 'Madrid',
-        country: 'Spain',
-        availability: 'Total',
-
-        //condiciones
-        terms: {
-            salary: 20000-25000,
-            workingDay: 'Total',
-            contract: 'Indefinite'
-
+        field1 : {
+            offerTitle: 'Devoloper',
+            city: 'Madrid',
+            country: 'Spain'
         },
 
-           //descripción de la oferta
-           offerDescription: {
-               descriptionOfRequirements: 'Experto en marketing digital para StartUp',
-               internalEncodings: 'marketing, digital, SEO, SEM'
-           },
-
-           //confirmación
-           confirmation: {
-               offerTitle: 'Experto Marketing Digital',
-               vacancies: 2,
-               language: 'Español',
-               sector: 'Marketing',
-               training: 'College degree',
-               offerDescriptionEnterprise:'Buscamos experto en marketing digital para gestionar equipo joven y motiva en startUp'
-           }
-    },
-
-    {
-        city: 'Barcelona',
-        country: 'Spain',
-        availability: 'Total',
-
-        //condiciones
-        terms: {
-            salary: 10000-12000,
-            workingDay: 'Total',
-            contract: 'Partial '
-
+        field2: {
+            availability: 'Total',
+            salary: 20000-23000,
+            workingDay: 'Remote',
+            contract: 'Indefinite',
+            vacancies: 2,
+            language: 'Spanish'
         },
 
-           //descripción de la oferta
-           offerDescription: {
-               descriptionOfRequirements: 'Dependiente tienda de muebles',
-               internalEncodings: 'Dependiente, atención personalizada, atención al detalle'
-           },
-
-           //confirmación
-           confirmation: {
-               offerTitle: 'Dependiente',
-               vacancies: 5,
-               language: 'Español',
-               sector: 'Comercio',
-               training: 'Basic studies',
-               offerDescriptionEnterprise:'Buscamos perfiles como el tuyo para nueva apertura en las Ramblas'
-           }
-    },
-
-    {
-        city: 'Sevilla',
-        country: 'Spain',
-        availability: 'Total',
-
-        //condiciones
-        terms: {
-            salary: 15000-25000,
-            workingDay: 'Total',
-            contract: 'Partial '
-
+        field1 : {
+            offerTitle: 'Devoloper',
+            city: 'Jaén',
+            country: 'Spain'
         },
 
-           //descripción de la oferta
-           offerDescription: {
-               descriptionOfRequirements: 'Bailaor',
-               internalEncodings: 'Bailarín, flamenco'
-           },
+        field2: {
+            availability: 'Total',
+            salary: 25000-27000,
+            workingDay: 'Total',
+            contract: 'Indefinite',
+            vacancies: 1,
+            language: 'Spanish'
+        },
 
-           //confirmación
-           confirmation: {
-               offerTitle: 'Bailaor',
-               vacancies: 3,
-               language: 'Español',
-               sector: 'Ocio',
-               training: 'Basic studies',
-               offerDescriptionEnterprise:'Buscamos bailaores para tablón flamenco en Sevilla centro'
-           }
+        field1 : {
+            offerTitle: 'Devoloper',
+            city: 'Bacercelona',
+            country: 'Spain'
+        },
+
+        field2: {
+            availability: 'Total',
+            salary: 17000-18000,
+            workingDay: 'Total',
+            contract: 'Indefinite',
+            vacancies: 4,
+            language: 'Catalan'
+        },
+
     }
 ]
+
 
 
 mongoose

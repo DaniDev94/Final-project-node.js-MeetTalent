@@ -1,16 +1,28 @@
 const JobOffer = require('../models/joboffer.models');
 
 
-
-const getJobOffer = async(req, res, next) => {
-    try{
-        const joboffer = await JobOffer.find();
-        return res.status(200).json(joboffer);
-    }catch(err){
-        err.message = 'Offer not found';
-        return next(`Error:${err}`);
+const getJobOfferByUser = async (req, res, next) => {
+    try {
+        const idUser = req.body.user;
+        const findOfferts = await JobOffer.find({user: idUser});
+        return res.status(200).json(findOfferts);
+    } catch (err) {
+        err.message = 'Not found';
+        return next (`Error:${err}`)
     }
-};
+}
+
+
+const getJobOfferById = async (req, res) => {
+    const { id } = req.params
+    const findJobOffer = JobOffer.findIndex(JobOffer => JobOffer.id == id);
+    if (findJobOffer >= 0) {
+        return res.status(200).json(JobOffer[findJobOffer])
+    } 
+        return res.status(404).json('No existe oferta con esa id')
+}
+
+
 const postNewJobOffer = async(req, res, next) => {
     try{
         const newJoboffer = new JobOffer(req.body);
@@ -21,6 +33,7 @@ const postNewJobOffer = async(req, res, next) => {
         return next (`Error:${err}`)
     }
 }
+
 
 const putJobOffer = async (req, res, next) => {
     try{
@@ -36,19 +49,7 @@ const putJobOffer = async (req, res, next) => {
     }
 }  
 
-const pachJobOffer =  async (req, res, next) => {
-    try{
-        const {id} = req.params;
 
-        const otherJobOffer=new JobOffer(req.body);
-        otherJobOffer._id = id;
-        const updateJobOffer= await JobOffer.findByIdAndUpdate(id, otherJobOffer)
-        return res.status(200).json(updateJobOffer);
-    }catch(err){
-        err.message = 'JobOffer cannot be update';
-        return next (`Error:${err}`)
-    }
-}   
 const deleteJobOffer =  async (req, res, next) => {
     try{
         const {id} = req.params;
@@ -59,21 +60,12 @@ const deleteJobOffer =  async (req, res, next) => {
         return next (`Error:${err}`)
     }
 }   
-const getJobOfferById = (req, res) => {
-    const { id } = req.params
-    const findJobOffer = JobOffer.findIndex(JobOffer => JobOffer.id == id);
-    if (findJobOffer >= 0) {
-        return res.status(200).json(JobOffer[findJobOffer])
-    } 
-        return res.status(404).json('No existe oferta con esa id')
-    
-}
+
 
 module.exports = {
-    getJobOffer, 
+    getJobOfferByUser,
+    getJobOfferById,
     postNewJobOffer,
     putJobOffer,
-    pachJobOffer,
-    deleteJobOffer,
-    getJobOfferById
+    deleteJobOffer
 };

@@ -4,7 +4,7 @@ const {getAllUsers, getUserById, postNewUser, putUserUpdate, deleteUser} = requi
 
 userRoutes.get('/', getAllUsers);
 userRoutes.get('/:id', getUserById);
-userRoutes.post('/', postNewUser);
+userRoutes.post('/',  postNewUser);
 userRoutes.put('/:id', putUserUpdate);
 userRoutes.delete('/:id', deleteUser);
 

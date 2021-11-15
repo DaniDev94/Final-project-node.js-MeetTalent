@@ -27,7 +27,10 @@ const postNewCandidate = async (req, res, next) => {
     try {
         const newCandidate = new Candidate(req.body);
         const candidatePicture = req.file ? req.file.path : req.body.image;
-        newCandidate.image = candidatePicture
+        newCandidate.image = candidatePicture;
+        newCandidate.networks.push(req.body.networkTwitter);
+        newCandidate.networks.push(req.body.networkInstagram);
+        newCandidate.networks.push(req.body.networkFacebook);
         const candidateSave = await newCandidate.save();
         return res.status(200).json(candidateSave);
     } catch (err) {

@@ -1,13 +1,10 @@
 const express = require('express');
 const { connectWithDb } = require('./utils/db/db');
-const EnterpriseRoutes = require('./routes/enterprise.routes');
 const CandidateRoutes = require('./routes/candidate.routes');
 const JobOfferRoutes = require('./routes/joboffer.routes');
-const userRoutes = require('./routes/user.routes')
+const userRoutes = require('./routes/user.routes');
 const cloudinary = require('cloudinary').v2;
 require("dotenv").config();
-
-
 
 
 cloudinary.config({
@@ -19,14 +16,13 @@ cloudinary.config({
 
 const PORT = 3000;
 const app = express();
-connectWithDb()
+connectWithDb();
 
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRoutes);
-app.use('/enterprise', EnterpriseRoutes);
 app.use('/candidates', CandidateRoutes);
 app.use('/joboffer', JobOfferRoutes);
 

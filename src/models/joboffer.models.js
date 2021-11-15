@@ -50,7 +50,8 @@ const jobofferSchema = new mongoose.Schema(
                 required: true,
                 trim: true
             },
-        }
+        },
+        user: {type: mongoose.Types.ObjectId, ref: 'users'}
     }, { timestamps: true });
 
 

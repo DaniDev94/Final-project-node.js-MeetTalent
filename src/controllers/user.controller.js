@@ -26,7 +26,9 @@ const getUserById = async (req, res, next) => {
 
 const postNewUser = async (req, res, next) => {
     try {
+        const userPicture = req.file ? req.file.path : '';
         const newUser = new User(req.body);
+        newUser.image = userPicture;
         const saveUser = await newUser.save();
         return res.status(200).json(saveUser);
     } catch (err) {

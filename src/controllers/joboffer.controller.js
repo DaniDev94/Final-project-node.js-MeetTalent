@@ -62,7 +62,6 @@ const deleteJobOffer =  async (req, res, next) => {
 const getJobOfferById = (req, res) => {
     const { id } = req.params
     const findJobOffer = JobOffer.findIndex(JobOffer => JobOffer.id == id);
-    //console.log(findJobOffer)
     if (findJobOffer >= 0) {
         return res.status(200).json(JobOffer[findJobOffer])
     } 

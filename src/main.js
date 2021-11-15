@@ -24,8 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRoutes);
-app.use('/candidates',[isAuth], CandidateRoutes);
 app.use('/joboffer',[isAuth], JobOfferRoutes);
+app.use('/candidates',[isAuth], CandidateRoutes);
 
 
 app.use('*', (req, res) => {

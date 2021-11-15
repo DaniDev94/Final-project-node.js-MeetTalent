@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
+
 const jobofferSchema = new mongoose.Schema(
     {
-        field1: {
+        jobInformation: {
             offerTitle: {
                 type: String,
                 required: true,
@@ -19,8 +20,7 @@ const jobofferSchema = new mongoose.Schema(
                 trim: true
             },
         },
-
-        field2: {
+        jobDescription: {
             availability: {
                 type: String,
                 trim: true
@@ -54,11 +54,8 @@ const jobofferSchema = new mongoose.Schema(
     }, { timestamps: true });
 
 
-
-
-const JobOffer = mongoose.model('jobOffer', jobofferSchema);
+const JobOffer = mongoose.model('joboffer', jobofferSchema);
 module.exports = JobOffer;
-
 
 
 

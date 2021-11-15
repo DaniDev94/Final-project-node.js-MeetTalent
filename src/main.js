@@ -4,6 +4,7 @@ const CandidateRoutes = require('./routes/candidate.routes');
 const JobOfferRoutes = require('./routes/joboffer.routes');
 const userRoutes = require('./routes/user.routes');
 const cloudinary = require('cloudinary').v2;
+const { isAuth } = require('./middlewares/auth.middleware');
 require("dotenv").config();
 
 
@@ -23,8 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRoutes);
-app.use('/candidates', CandidateRoutes);
-app.use('/joboffer', JobOfferRoutes);
+app.use('/candidates',[isAuth], CandidateRoutes);
+app.use('/joboffer',[isAuth], JobOfferRoutes);
 
 
 app.use('*', (req, res) => {

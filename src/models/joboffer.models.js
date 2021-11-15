@@ -4,54 +4,48 @@ const mongoose = require('mongoose');
 const jobofferSchema = new mongoose.Schema(
     {
         jobInformation: {
-            offerTitle: {
+            jobTitle: {
                 type: String,
-                required: true,
-                trim: true
+                trim: true,
+                required: true
             },
-            city: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            country: {
-                type: String,
-                required: true,
-                trim: true
-            },
-        },
-        jobDescription: {
-            availability: {
-                type: String,
-                trim: true
-            },
-            salary: {
+            vacancyNumbers: {
                 type: Number,
-                required: true,
-                trim: true
             },
-            workingDay: {
+            languages: {
                 type: String,
-                required: true,
-                trim: true
+                trim: true,
             },
-            contract: {
+            sector: {
                 type: String,
-                required: true,
-                trim: true
+                enum: ['Diseño', 'Desarrollo', 'Seguridad informática'],
+                trim: true,
             },
-            vacancies: {
-                type: Number,
-                required: true,
-                trim: true
-            },
-            language: {
+            training: {
                 type: String,
-                required: true,
-                trim: true
+                enum: ['Grado Medio', 'Grado Superior', 'Master', 'Licenciatura', 'Sin formación'],
+                trim: true, 
             },
+            jobDescription: {
+                type: String,
+                trim: true,
+            },
+            terms: {
+                salary: {
+                    type: Number,
+                    require: true
+                },
+                workingHours: {
+                    type: Number,
+                    require: true
+                },
+                contract: {
+                    type: String,
+                    trim: true,
+                }
+            }
         },
-        user: {type: mongoose.Types.ObjectId, ref: 'users'}
+        user: { type: mongoose.Types.ObjectId, ref: 'users' }
     }, { timestamps: true });
 
 

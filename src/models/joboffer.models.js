@@ -18,13 +18,13 @@ const jobofferSchema = new mongoose.Schema(
             },
             sector: {
                 type: String,
-                enum: ['Diseño', 'Desarrollo', 'Seguridad informática'],
+                enum: ['Diseño Ux/Ui', 'Desarrollo Web', 'Ciberseguridad'],
                 trim: true,
             },
             training: {
                 type: String,
                 enum: ['Grado Medio', 'Grado Superior', 'Master', 'Licenciatura', 'Sin formación'],
-                trim: true, 
+                trim: true,
             },
             jobDescription: {
                 type: String,

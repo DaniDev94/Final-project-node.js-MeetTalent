@@ -1,4 +1,7 @@
 const User = require('../models/user.model')
+const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken');
+require('dotenv').config()
 
 
 const getAllUsers = async (req, res, next) => {
@@ -38,6 +41,32 @@ const postNewUser = async (req, res, next) => {
 }
 
 
+const loginUser = async (req, res, next) => {
+    try {
+        const userInDb = await User.findOne({email: req.body.email})
+        if(bcrypt.compareSync(req.body.password, userInDb.password)){
+            userInDb.password = null;
+            const generateToken = JWT.sign({id: userInDb._id, email: userInDb.email},process.env.JWT_SECRET, {expiresIn:'1d'});
+            res.status(200).json(generateToken);
+        } 
+    } catch (err) {
+        err.message ='Login error';
+        return next(`Error: ${err}.`);
+    }
+}
+
+
+const logoutUser = async (req, res, next) => {
+    try {
+        const removeToken = null;
+        res.status(200).json(removeToken)
+    } catch (err) {
+        err.message ='Logout error';
+        return next(`Error: ${err}.`);
+    }
+}
+
+
 const putUserUpdate = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -69,6 +98,8 @@ module.exports = {
     getUserById,
     getAllUsers,
     postNewUser,
+    loginUser,
+    logoutUser,
     putUserUpdate,
     deleteUser
 }

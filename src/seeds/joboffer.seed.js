@@ -1,58 +1,70 @@
 const mongoose = require('mongoose');
 const JobOffer = require('../models/joboffer.models');
 require('dotenv').config();
-
 const jobOffer = [
     {
-        field1 : {
+        jobInformation: {
             offerTitle: 'Devoloper',
             city: 'Madrid',
             country: 'Spain'
         },
-
-        field2: {
+        jobDescription: {
             availability: 'Total',
-            salary: 20000-23000,
+            salary: 20000,
             workingDay: 'Remote',
             contract: 'Indefinite',
             vacancies: 2,
             language: 'Spanish'
-        },
+        }
+    },
 
-        field1 : {
+    {
+        jobInformation: {
+            offerTitle: 'Devoloper',
+            city: 'Madrid',
+            country: 'Spain'
+        },
+        jobDescription: {
+            availability: 'Total',
+            salary: 20000,
+            workingDay: 'Remote',
+            contract: 'Indefinite',
+            vacancies: 2,
+            language: 'Spanish'
+        }
+    },
+    {
+        jobInformation: {
             offerTitle: 'Devoloper',
             city: 'Jaén',
             country: 'Spain'
         },
-
-        field2: {
+        jobDescription: {
             availability: 'Total',
-            salary: 25000-27000,
+            salary: 25000,
             workingDay: 'Total',
             contract: 'Indefinite',
             vacancies: 1,
             language: 'Spanish'
-        },
-
-        field1 : {
+        }
+    },
+    {
+        jobInformation: {
             offerTitle: 'Devoloper',
             city: 'Bacercelona',
             country: 'Spain'
         },
-
-        field2: {
+        jobDescription: {
             availability: 'Total',
-            salary: 17000-18000,
+            salary: 17000,
             workingDay: 'Total',
             contract: 'Indefinite',
             vacancies: 4,
             language: 'Catalan'
-        },
-
+        }
     }
+
 ]
-
-
 
 mongoose
     .connect(process.env.ATLASDBURL, {

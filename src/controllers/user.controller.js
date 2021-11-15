@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
+const validations = require('../utils/validations/user.validation');
 require('dotenv').config()
 
 
@@ -29,7 +30,13 @@ const getUserById = async (req, res, next) => {
 
 const postNewUser = async (req, res, next) => {
     try {
-        const userPicture = req.file ? req.file.path : '';
+        if(!validations.validationPassword(req.body.password) || !validations.validationEmail(req.body.email)) {
+            const error = new Error;
+            error.status = 400;
+            error.message = 'Password or email with minimums not obtained';
+            return next(error);
+        }
+        const userPicture = req.file ? req.file.path : '';
         const newUser = new User(req.body);
         newUser.image = userPicture;
         const saveUser = await newUser.save();
@@ -43,14 +50,14 @@ const postNewUser = async (req, res, next) => {
 
 const loginUser = async (req, res, next) => {
     try {
-        const userInDb = await User.findOne({email: req.body.email})
-        if(bcrypt.compareSync(req.body.password, userInDb.password)){
+        const userInDb = await User.findOne({ email: req.body.email })
+        if (bcrypt.compareSync(req.body.password, userInDb.password)) {
             userInDb.password = null;
-            const generateToken = JWT.sign({id: userInDb._id, email: userInDb.email},process.env.JWT_SECRET, {expiresIn:'1d'});
+            const generateToken = JWT.sign({ id: userInDb._id, email: userInDb.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
             res.status(200).json(generateToken);
-        } 
+        }
     } catch (err) {
-        err.message ='Login error';
+        err.message = 'Login error';
         return next(`Error: ${err}.`);
     }
 }
@@ -61,7 +68,7 @@ const logoutUser = async (req, res, next) => {
         const removeToken = null;
         res.status(200).json(removeToken)
     } catch (err) {
-        err.message ='Logout error';
+        err.message = 'Logout error';
         return next(`Error: ${err}.`);
     }
 }

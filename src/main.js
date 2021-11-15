@@ -25,12 +25,12 @@ connectWithDb()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.use('/users', userRoutes);
 app.use('/enterprise', EnterpriseRoutes);
 app.use('/candidates', CandidateRoutes);
 app.use('/joboffer', JobOfferRoutes);
 
 
-app.use('/users', userRoutes)
 app.use('*', (req, res) => {
     return res.status(404).send('Route not found');
 });

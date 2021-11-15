@@ -4,66 +4,34 @@ require('dotenv').config();
 const jobOffer = [
     {
         jobInformation: {
-            offerTitle: 'Devoloper',
-            city: 'Madrid',
-            country: 'Spain'
-        },
-        jobDescription: {
-            availability: 'Total',
-            salary: 20000,
-            workingDay: 'Remote',
-            contract: 'Indefinite',
-            vacancies: 2,
-            language: 'Spanish'
-        }
-    },
-
-    {
-        jobInformation: {
-            offerTitle: 'Devoloper',
-            city: 'Madrid',
-            country: 'Spain'
-        },
-        jobDescription: {
-            availability: 'Total',
-            salary: 20000,
-            workingDay: 'Remote',
-            contract: 'Indefinite',
-            vacancies: 2,
-            language: 'Spanish'
+            jobTitle: 'Developer Angular',
+            vacancyNumbers: 2,
+            languages:'Ingles medio',
+            sector: 'Desarrollo Web',
+            training: 'Grado Medio',
+            jobDescription: 'Buscamos un desarrolladro ANGULAR WEB con al menos 3 años de experiencia para importante proyecto.',
+            terms: {
+                salary: 20000,
+                workingHours: 40,
+                contract: 'Indefinido'
+            }
         }
     },
     {
         jobInformation: {
-            offerTitle: 'Devoloper',
-            city: 'Jaén',
-            country: 'Spain'
-        },
-        jobDescription: {
-            availability: 'Total',
-            salary: 25000,
-            workingDay: 'Total',
-            contract: 'Indefinite',
-            vacancies: 1,
-            language: 'Spanish'
-        }
-    },
-    {
-        jobInformation: {
-            offerTitle: 'Devoloper',
-            city: 'Bacercelona',
-            country: 'Spain'
-        },
-        jobDescription: {
-            availability: 'Total',
-            salary: 17000,
-            workingDay: 'Total',
-            contract: 'Indefinite',
-            vacancies: 4,
-            language: 'Catalan'
+            jobTitle: 'Diseñador/a UX/UI',
+            vacancyNumbers: 2,
+            languages:'Ingles Alto',
+            sector: 'Diseño Ux/Ui',
+            training: 'Master',
+            jobDescription: 'Si quieres formar parte de un gran equipo de diseño y adentrarte en el mundo de la experiencia de usuario, este es tu lugar. Ofrecemos estabilidad, salario competente y gran ambiente de trabajo',
+            terms: {
+                salary: 22000,
+                workingHours: 40,
+                contract: 'Indefinido'
+            }
         }
     }
-
 ]
 
 mongoose

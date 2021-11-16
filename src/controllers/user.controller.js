@@ -5,16 +5,6 @@ const validations = require('../utils/validations/user.validation');
 require('dotenv').config()
 
 
-const getAllUsers = async (req, res, next) => {
-    try {
-        const allUsers = await User.find();
-        return res.status(200).json(allUsers);
-    } catch (err) {
-        err.message = 'Users not found';
-        return next(`Error: ${err}.`);
-    }
-}
-
 
 const getUserById = async (req, res, next) => {
     try {
@@ -54,7 +44,7 @@ const loginUser = async (req, res, next) => {
         if (bcrypt.compareSync(req.body.password, userInDb.password)) {
             userInDb.password = null;
             const generateToken = JWT.sign({ id: userInDb._id, email: userInDb.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
-            res.status(200).json(generateToken);
+            res.status(200).json({user: userInDb, token: generateToken});
         }
     } catch (err) {
         err.message = 'Login error';
@@ -65,8 +55,7 @@ const loginUser = async (req, res, next) => {
 
 const logoutUser = async (req, res, next) => {
     try {
-        const removeToken = null;
-        res.status(200).json(removeToken)
+        res.status(200).json({user: null, token: ''});
     } catch (err) {
         err.message = 'Logout error';
         return next(`Error: ${err}.`);

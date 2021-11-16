@@ -1,16 +1,16 @@
 const userRoutes = require('express').Router();
 const upload = require('../middlewares/file.middleware');
 const { isAuth } = require('../middlewares/auth.middleware');
-const {getAllUsers, getUserById, postNewUser, loginUser, logoutUser, putUserUpdate, deleteUser} = require('../controllers/user.controller');
+const { getUserById, postNewUser, loginUser, logoutUser, putUserUpdate, deleteUser} = require('../controllers/user.controller');
 
 
-userRoutes.get('/', getAllUsers);//Eliminar al sacar la BBDD a producción
-userRoutes.get('/:id', getUserById);
+
+userRoutes.get('/:id',[isAuth], getUserById);
 userRoutes.post('/', upload.single('image'), postNewUser);
 userRoutes.post('/login', loginUser);
 userRoutes.post('/logout',[isAuth], logoutUser);
-userRoutes.put('/:id', putUserUpdate);
-userRoutes.delete('/:id', deleteUser);
+userRoutes.put('/:id',[isAuth], putUserUpdate);
+userRoutes.delete('/:id',[isAuth], deleteUser);
 
 
 module.exports = userRoutes;

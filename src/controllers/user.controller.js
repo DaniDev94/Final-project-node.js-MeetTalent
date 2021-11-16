@@ -20,7 +20,7 @@ const getUserById = async (req, res, next) => {
 
 const postNewUser = async (req, res, next) => {
     try {
-        if(!validations.validationPassword(req.body.password) || !validations.validationEmail(req.body.email)) {
+        if (!validations.validationPassword(req.body.password) || !validations.validationEmail(req.body.email)) {
             const error = new Error;
             error.status = 400;
             error.message = 'Password or email with minimums not obtained';
@@ -44,7 +44,7 @@ const loginUser = async (req, res, next) => {
         if (bcrypt.compareSync(req.body.password, userInDb.password)) {
             userInDb.password = null;
             const generateToken = JWT.sign({ id: userInDb._id, email: userInDb.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
-            res.status(200).json({user: userInDb, token: generateToken});
+            res.status(200).json({ user: userInDb, token: generateToken });
         }
     } catch (err) {
         err.message = 'Login error';
@@ -55,7 +55,7 @@ const loginUser = async (req, res, next) => {
 
 const logoutUser = async (req, res, next) => {
     try {
-        res.status(200).json({user: null, token: ''});
+        res.status(200).json({ user: null, token: '' });
     } catch (err) {
         err.message = 'Logout error';
         return next(`Error: ${err}.`);

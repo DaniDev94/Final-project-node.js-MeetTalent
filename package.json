@@ -6,16 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/main.js",
-    "dev": "nodemon src/main.js"
+    "dev": "nodemon src/main.js",
+    "debug": "node src/main.js"
   },
   "author": "Isabel Morato, Aitor Olivar y Daniel López",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.27.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.12"
+    "mongoose": "^6.0.12",
+    "multer": "^1.4.3",
+    "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

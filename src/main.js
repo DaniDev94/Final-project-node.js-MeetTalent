@@ -7,6 +7,7 @@ const cloudinary = require('cloudinary').v2;
 const { isAuth } = require('./middlewares/auth.middleware');
 require("dotenv").config();
 
+const cors=require('cors')
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -15,16 +16,28 @@ cloudinary.config({
 })
 
 
+
 const PORT = 4000;
 const app = express();
 connectWithDb();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'http://localhost:3001'],
+    credentials: true,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRoutes);
-app.use('/joboffer',[isAuth], JobOfferRoutes);
+app.use('/joboffer', JobOfferRoutes);
 app.use('/candidates',[isAuth], CandidateRoutes);
 
 

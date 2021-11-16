@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
         CEO:  {type:String, required: true, unique:true, trim:true},
         image: {type:String, trim:true},
         CIF: { type: String, trim: true, unique: true, required: true },
-        email: { type: String, trim: true, required: true, unique: true },
+        email: { type: String, required: true, unique: true },
         password: { type: String, trim: true, required: true },
     },
     {

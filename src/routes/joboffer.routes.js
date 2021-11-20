@@ -5,7 +5,7 @@ const { getJobOfferByUser, getJobOfferById, postNewJobOffer, putJobOffer, delete
 
 JobOfferRoutes.post('/', getJobOfferByUser);
 JobOfferRoutes.get('/:id',getJobOfferById);
-JobOfferRoutes.post('/',postNewJobOffer);
+JobOfferRoutes.post('/create',postNewJobOffer);
 JobOfferRoutes.put('/:id',putJobOffer);
 JobOfferRoutes.delete('/:id',deleteJobOffer);
 

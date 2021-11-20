@@ -12,6 +12,10 @@ const jobofferSchema = new mongoose.Schema(
             vacancyNumbers: {
                 type: Number,
             },
+            city: {
+                type: String,
+                trim: true,
+            },
             languages: {
                 type: String,
                 trim: true,

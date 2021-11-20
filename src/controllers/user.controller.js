@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 const bcrypt = require('bcrypt');
-const JWT = require('jsonwebtoken');
+const JWT = require('jsonwebtoken')
 const validations = require('../utils/validations/user.validation');
 require('dotenv').config()
 
@@ -44,7 +44,7 @@ const loginUser = async (req, res, next) => {
         if (bcrypt.compareSync(req.body.password, userInDb.password)) {
             userInDb.password = null;
             const generateToken = JWT.sign({ id: userInDb._id, email: userInDb.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
-            res.status(200).json({ user: userInDb, token: generateToken });
+            return res.status(200).json({ user: userInDb, token: generateToken });
         }
     } catch (err) {
         err.message = 'Login error';

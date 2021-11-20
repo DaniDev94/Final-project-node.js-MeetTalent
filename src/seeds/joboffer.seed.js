@@ -6,6 +6,7 @@ const jobOffer = [
         jobInformation: {
             jobTitle: 'Developer Angular',
             vacancyNumbers: 2,
+            city:  'Madrid',
             languages:'Ingles medio',
             sector: 'Desarrollo Web',
             training: 'Grado Medio',
@@ -21,6 +22,7 @@ const jobOffer = [
         jobInformation: {
             jobTitle: 'Diseñador/a UX/UI',
             vacancyNumbers: 2,
+            city:  'Sevilla',
             languages:'Ingles Alto',
             sector: 'Diseño Ux/Ui',
             training: 'Master',

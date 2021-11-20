@@ -21,7 +21,7 @@ const PORT = 4000;
 const app = express();
 connectWithDb();
 
-app.use((req, res, next) => {
+app.use((req, res, next) => {y
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRoutes);
-app.use('/joboffer',[isAuth] JobOfferRoutes);
+app.use('/joboffer',[isAuth], JobOfferRoutes);
 app.use('/candidates',[isAuth], CandidateRoutes);
 
 

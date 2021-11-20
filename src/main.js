@@ -6,15 +6,14 @@ const userRoutes = require('./routes/user.routes');
 const cloudinary = require('cloudinary').v2;
 const { isAuth } = require('./middlewares/auth.middleware');
 require("dotenv").config();
+const cors = require('cors');
 
-const cors=require('cors')
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
 })
-
 
 
 const PORT = 4000;
@@ -33,9 +32,9 @@ app.use(cors({
     credentials: true,
 }));
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use('/users', userRoutes);
 app.use('/joboffer',[isAuth], JobOfferRoutes);
 app.use('/candidates',[isAuth], CandidateRoutes);
@@ -44,6 +43,7 @@ app.use('/candidates',[isAuth], CandidateRoutes);
 app.use('*', (req, res) => {
     return res.status(404).send('Route not found');
 });
+
 
 app.use((req, res, next) =>{
     let err = new Error();

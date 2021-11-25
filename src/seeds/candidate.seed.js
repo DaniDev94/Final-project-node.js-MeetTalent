@@ -173,7 +173,7 @@ const candidates = [
         }
     },
     {
-        image: 'https://res.cloudinary.com/djj8ooz4d/image/upload/v1636996313/Meettalent/pexels-kampus-production-8190818_qf1dpx.jpg',
+        image: 'https://res.cloudinary.com/djj8ooz4d/image/upload/v1637863497/Meettalent/pexels-spencer-selover-428364_z1xxnf.jpg',
         name: {
             first: 'Daniel',
             last: 'Plaza'

@@ -56,6 +56,17 @@ const deleteCandidate = async (req, res, next) => {
         return next(`Error: ${err}.`);
     }
 }
+const getCandidateByName = async (req, res, next) => {
+    try {
+        const { name } = req.params;
+        const candidateByName = await Candidate.findOne({"name.first":name});
+        return res.status(200).json(candidateByName)
+    } catch (err) {
+        err.message = 'No candidate found with this name';
+        return next(`Error: ${err}.`);
+    }
+}
+
 
 
 module.exports = {
@@ -63,5 +74,6 @@ module.exports = {
     getCandidateById,
     postNewCandidate,
     putCandidateUpdate,
-    deleteCandidate
+    deleteCandidate,
+    getCandidateByName
 }

@@ -1,7 +1,8 @@
- const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 require("dotenv").config();
 const urlDb = process.env.ATLASDBURL;
-//console.log(urlDb)
+
+
 const connectWithDb = async () => {
   try {
     const db = await mongoose.connect(urlDb, {
@@ -18,4 +19,3 @@ const connectWithDb = async () => {
 module.exports = {
   connectWithDb,
 };
- 

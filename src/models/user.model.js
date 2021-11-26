@@ -1,29 +1,30 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const validations = require('../utils/validators/validations')
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
 
 const userSchema = new mongoose.Schema(
     {
-       name:{type:String, trim:true, required:true},
-       alias: {type:String, trim:true, unique:true, required:true},
-       password:{type:String, trim:true,required:true}
-       
+        name: { type: String, trim: true, required: true },
+        CEO:  {type:String, required: true, unique:true, trim:true},
+        image: {type:String, trim:true},
+        CIF: { type: String, trim: true, unique: true, required: true },
+        email: { type: String, required: true, unique: true },
+        password: { type: String, trim: true, required: true },
     },
     {
         timestamps: true
     }
 );
 
-userSchema.pre("save", function (next) {
-    if(!validations.validationPassword(this.password)){
-        const error = new Error
-        error.status = 400
-        error.message = 'La contraseña no tiene los minimos requeridos'
-        return next(error)
-    }
+
+userSchema.pre('save', function(next) {
     this.password = bcrypt.hashSync(this.password, 10);
     next();
-});
+})
 
-const User = mongoose.model('users', userSchema)
-module.exports = User
+
+const User = mongoose.model('users', userSchema);
+module.exports = User;
+
+
+

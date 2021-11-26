@@ -1,13 +1,16 @@
 const userRoutes = require('express').Router();
-const {isAuth} = require('../middleware/auth.middleware')
-
-const {getAllUsers, postNewUser, loginUser, logoutUser} = require('../controllers/user.controller')
-
-userRoutes.get('/', getAllUsers)
-userRoutes.post('/', postNewUser)
-
-userRoutes.post('/login', loginUser)
-userRoutes.post('/logout', [isAuth], logoutUser)
+const upload = require('../middlewares/file.middleware');
+const { isAuth } = require('../middlewares/auth.middleware');
+const { getUserById, postNewUser, loginUser, logoutUser, putUserUpdate, deleteUser} = require('../controllers/user.controller');
 
 
-module.exports = userRoutes
+
+userRoutes.get('/:id',[isAuth], getUserById);
+userRoutes.post('/', upload.single('image'), postNewUser);
+userRoutes.post('/login', loginUser);
+userRoutes.post('/logout',[isAuth], logoutUser);
+userRoutes.put('/:id',[isAuth], putUserUpdate);
+userRoutes.delete('/:id',[isAuth], deleteUser);
+
+
+module.exports = userRoutes;

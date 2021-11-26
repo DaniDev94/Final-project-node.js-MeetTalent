@@ -1,71 +1,100 @@
 const User = require('../models/user.model')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken')
+const validations = require('../utils/validations/user.validation');
+require('dotenv').config()
 
 
-const getAllUsers = async (req, res, next) => {
+
+const getUserById = async (req, res, next) => {
     try {
-        const users = await User.find()
-        return res.status(200).json(users)
-    } catch (error) {
-        return next(error)
+        const { id } = req.params;
+        const userById = await User.findById(id);
+        return res.status(200).json(userById);
+    } catch (err) {
+        err.message = 'No user found with this id';
+        return next(`Error: ${err}.`);
     }
 }
 
-const postNewUser = async (req, res, next) =>{
-    try{
-       const newUser = new User(req.body)
 
-       
-       const userInBd = await newUser.save()
-        return res.status(201).json(userInBd)    
-    }catch(error){
-        return next(error)
-    }
-}
-
-const loginUser = async (req, res, next) =>{
-    try{
-        //console.log('alias-->',req.body.alias)
-        const userInBd = await User.findOne({alias:req.body.alias})
-       // console.log('usuario encontrado-->',userInBd)
-        
-       if(!userInBd){
-            const error = new Error
-            error.status = 404
-            error.message = 'No existe usuario con ese alias'
-            return next(error)
+const postNewUser = async (req, res, next) => {
+    try {
+        if (!validations.validationPassword(req.body.password) || !validations.validationEmail(req.body.email)) {
+            const error = new Error;
+            error.status = 400;
+            error.message = 'Password or email with minimums not obtained';
+            return next(error);
         }
-        
-        if(bcrypt.compareSync(req.body.password, userInBd.password)){
-            userInBd.password = null
-           // console.log('constraseña correcta')
+        const userPicture = req.file ? req.file.path : '';
+        const newUser = new User(req.body);
+        newUser.image = userPicture;
+        const saveUser = await newUser.save();
+        return res.status(200).json(saveUser);
+    } catch (err) {
+        err.message = 'The new user cannot be created, it may already exist';
+        return next(`Error: ${err}.`);
+    }
+}
 
-            const token = jwt.sign({ id: userInBd._id, alias: userInBd.alias }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-            return res.status(200).json(token)
+const loginUser = async (req, res, next) => {
+    try {
+        const userInDb = await User.findOne({ email: req.body.email })
+        if (bcrypt.compareSync(req.body.password, userInDb.password)) {
+            userInDb.password = null;
+            const generateToken = JWT.sign({ id: userInDb._id, email: userInDb.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
+            return res.status(200).json({ user: userInDb, token: generateToken });
         }
-
-    }catch(error){
-        error.message = 'error al loguear'
-        return next(error)
-    }
-
-}
-
-const logoutUser = (req, res, next) => {
-    try{
-        const token = null
-        return res.status(200).json(token)
-    }catch(error){
-        return next(error)
+    } catch (err) {
+        err.message = 'Login error';
+        return next(`Error: ${err}.`);
     }
 }
+
+
+const logoutUser = async (req, res, next) => {
+    try {
+        res.status(200).json({ user: null, token: '' });
+    } catch (err) {
+        err.message = 'Logout error';
+        return next(`Error: ${err}.`);
+    }
+}
+
+
+const putUserUpdate = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const varyUser = new User(req.body);
+        varyUser._id = id;
+        const updateUser = await User.findByIdAndUpdate(id, varyUser);
+        return res.status(200).json(updateUser);
+    } catch (err) {
+        err.message = 'User not found, cannot be updated';
+        return next(`Error: ${err}.`);
+    }
+}
+
+
+const deleteUser = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const deleteUser = await User.findByIdAndDelete(id);
+        return res.status(200).json(deleteUser);
+    } catch (err) {
+        err.status = 404;
+        err.message = 'User not found, could not be removed';
+        return next(`Error: ${err}.`);
+    }
+}
+
 
 module.exports = {
-    getAllUsers,
+    getUserById,
     postNewUser,
     loginUser,
-    logoutUser
-
+    logoutUser,
+    putUserUpdate,
+    deleteUser
 }

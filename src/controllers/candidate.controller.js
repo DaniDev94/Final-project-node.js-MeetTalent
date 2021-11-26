@@ -11,6 +11,7 @@ const getAllCandidates = async (req, res, next) => {
     }
 }
 
+
 const getCandidateById = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -22,29 +23,6 @@ const getCandidateById = async (req, res, next) => {
     }
 }
 
-const postNewCandidate = async (req, res, next) => {
-    try {
-        const newCandidate = new Candidate(req.body);
-        const candidateSave = await newCandidate.save();
-        return res.status(200).json(candidateSave);
-    } catch (err) {
-        err.message = 'The new candidate cannot be created, it may already exist';
-        return next(`Error: ${err}.`);
-    }
-}
-
-const putCandidateUpdate = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const varyCandidate = new Candidate(req.body);
-        varyCandidate._id = id;
-        const updateCandidate = await Candidate.findByIdAndUpdate(id, varyCandidate);
-        return res.status(200).json(updateCandidate);
-    } catch (err) {
-        err.message = 'Candidate not found, cannot be updated';
-        return next(`Error: ${err}.`);
-    }
-}
 
 const deleteCandidate = async (req, res, next) => {
     try {

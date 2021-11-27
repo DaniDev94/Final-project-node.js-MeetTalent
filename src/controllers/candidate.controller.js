@@ -50,8 +50,7 @@ const getCandidateByName = async (req, res, next) => {
 module.exports = {
     getAllCandidates,
     getCandidateById,
-    postNewCandidate,
-    putCandidateUpdate,
+    
     deleteCandidate,
     getCandidateByName
 }
